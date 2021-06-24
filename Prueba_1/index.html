@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Prueba 1</title>
+
+    <!-- Style External Sources -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <!-- ..... -->
+
+    <!-- Style Internal Sources -->
+    <link rel="stylesheet" href="resources/css/main.css" type="text/css">
+    <!-- ..... -->
+    
+  </head>
+  <body>
+
+    <!-- Título -->
+    <div class="border-primary bg-primary text-white col-xm-12 col-sm-10 col-md-8 col-lg-6" style="padding: 5px 20px; margin: 30px 0px; border-top-right-radius: 40px; border-bottom-right-radius: 40px;">
+      <h2>Prueba 1: Giovanni de la Vega Huerta</h2>
+    </div>
+    <!-- ..... -->
+
+    <!-- Inicia Container -->
+    <div class="container">
+
+      <div class="card border-primary boxShadow">
+        <div class="card-header bg-primary text-white">Lista de Usuarios</div>
+
+        <div class="card-body">
+
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead class="thead-light">
+                <tr>
+                  <th>id</th>
+                  <th colspan="4">Usuario</th>
+                </tr>
+              </thead>
+              <tbody id="accordionP">
+
+                <template id="userTemp">
+                  <tr onclick="INFO_GET(this)" data-toggle="collapse" data-target="#accordion" class="clickable USER_HEADER" aria-expanded="true" aria-controls="accordion">
+                    <td class="USER_ID">id</td>
+                    <td colspan="4" class="USER_NAME">username</td>
+                  </tr>
+                  <tr id="accordion_" class="collapse USER_APPEND" data-parent="#accordionP">
+
+                    <!-- Aquí se inserta info template -->
+
+                  </tr>
+                </template>
+
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- info template -->
+      <template class="USER_TEMP" id="infoTemp">
+        <td class=""></td>
+        <td class="INFO_PER">
+          name<br>
+          email<br>
+          phone<br>
+          website
+        </td>
+        <td class="INFO_DIR">
+          address->street<br>
+          address->suite<br>
+          address->city<br>
+          address->zipcode<br>
+        </td>
+        <td class="INFO_WOR">
+          company->name<br>
+          company->catchPhrase<br>
+          company->bs<br>
+        </td>
+        <td>
+          <button onclick="POSTS_GET(this)" type="button" class="btn btn-warning butonUser BUT_POSTS" data-toggle="modal" data-target="#ModalPOSTS">Posts</button>
+          <button onclick="TODOS_GET(this)" type="button" class="btn btn-success butonUser BUT_TODOS" data-toggle="modal" data-target="#ModalTODOS">Todos</button>
+        </td>
+      </template>
+      <!-- ..... -->
+
+
+      <!-- Modal POSTS -->
+      <div class="modal fade" id="ModalPOSTS" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+          <div class="modal-content">
+            <div class="modal-header bg-warning">
+              <h5 class="modal-title" id="exampleModalLabel">Mis Posts</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" >
+
+              <ul class="list-unstyled" id="postsAppend">
+
+                <!-- Aquí se incerta posts template -->
+
+              </ul>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- posts template -->
+      <template id="postsTemp">
+        <li class="media separatorPos">
+          <i class="far fa-smile userPos text-warning"></i>
+          <div class="media-body">
+            <h5 class="mt-0 POSTS_TITLE">posts->title</h5>
+            <span class="POSTS_BODY">posts->body</span>
+
+            <ul class="list-unstyled POSTS_COMMENTS_APPEND" id="commentsAppend_id">
+
+              <!-- Aquí va comments tamplate -->
+              <template class="POSTS_COMMENTS_TEMP" id="commentsTemp_id">
+                <li class="media mt-3">
+                  <i class="far fa-comment-dots iconPos text-warning"></i>
+                  <div class="media-body">
+                    <h5 class="mt-0"><span class="COMMENTS_NAME">comments->name</span> - <u class="COMMENTS_EMAIL text-primary">comments->email</u></h5>
+                    <span class="glyphicon glyphicon-comment"></span> <span class="COMMENTS_BODY">comments->body</span>
+                  </div>
+                </li>
+              </template>
+              <!-- ..... -->
+
+            </ul>
+
+          </div>
+        </li>
+        <br>
+      </template>
+      <!-- ..... -->
+
+
+      <!-- Modal TODOS -->
+      <div class="modal fade" id="ModalTODOS" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+        <div class="modal-dialog modal-dialog modal-lg modal-dialog-scrollable" role="document">
+          <div class="modal-content">
+            <div class="modal-header bg-success">
+              <h5 class="modal-title text-white" id="exampleModalLabel">Mis Tareas</h5>
+              <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" id="SCROLL">
+
+              <div class="row">
+
+                <!-- lista de taras -->
+                <div class="col-sm-12 tareasC" id="collapseTar">
+                  <ul class="list-group" id="todosAppend">
+
+                    <!-- Aquí se incerta el todos template -->
+
+                  </ul>
+                </div>
+                <!-- ..... -->
+
+                <!-- formulario para nueva tatrea -->
+                <div class="collapse formulario col-sm-12" id="collapseForm">
+                  <h3 class="text-success">Agrega Nueva Tarea</h3>
+                  <hr>
+                  <form class="FORM" id="nuevaTarForm" action="index.html" method="post">
+
+                    <div class="form-group">
+                      <label for="title">Título</label>
+                      <textarea class="form-control" id="title" rows="3"></textarea>
+                    </div>
+                    <div class="form-group form-check">
+                      <input type="checkbox" class="form-check-input" id="completed">
+                      <label class="form-check-label" for="completed">¿Está Completa?</label>
+                    </div>
+                    <button id="BUT_SUB" type="submit" name="button" hidden></button>
+
+                  </form>
+                </div>
+                <!-- ..... -->
+
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+              <button type="button"class="btn btn-primary" id="addTarea" data-toggle="collapse" data-target="#collapseForm" aria-expanded="false" aria-controls="collapseForm">Nueva Tarea</button>
+              <button type="button" class="btn btn-success" id="SaveTar" onclick="FORM_SUBMIT()">Guardar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- todos template -->
+      <template id="todosTemp">
+        <li class="list-group-item list-group-item-action list-group-item-light">
+          <div class="custom-control custom-checkbox tareasTexto">
+            <input type="checkbox" class="custom-control-input TODOS_COMPLETED" checked readonly>
+            <label class="custom-control-label TODOS_TITLE" for="customCheck">todos->title</label>
+          </div>
+        </li>
+      </template>
+      <!-- ..... -->
+
+
+    </div>
+    <!-- Termina Container -->
+
+
+    <!-- Banderas para Boostrap Screen Size -->
+    <div class="device-xs d-block d-sm-none"></div>
+    <div class="device-sm d-none d-sm-block d-md-none"></div>
+    <div class="d-none d-md-block d-lg-none"></div>
+    <div class="device-lg d-none d-lg-block d-xl-none"></div>
+    <!-- ..... -->
+
+
+    <!-- Inicia Scripts -->
+
+
+    <!-- Revisar Boostrat Screen Size -->
+    <script>
+      function isBreakpoint( alias ) {
+        return $('.device-' + alias).is(':visible');
+      }
+    </script>
+    <!-- ..... -->
+
+    <!-- Reglas de Negocio para Formulario Dinámico -->
+    <script>
+      document.getElementById("addTarea").onclick = agregaTarea;
+      var EnNuevaTarea = true;
+      var botAddTar = document.getElementById("addTarea");
+      var botSaveTar = document.getElementById("SaveTar");
+      var divForm = document.getElementById("collapseForm");
+      var divTar = document.getElementById("collapseTar");
+
+      agregaTarea();
+
+      document.getElementById("title").oninput = campoLleno;
+      var inpTitle = document.getElementById("title");
+      var inpComplet = document.getElementById("completed");
+
+      function campoLleno() {
+        if(inpTitle.value == '') {
+          botSaveTar.style.display = "none";
+        }
+        else {
+          botSaveTar.style.display = "block";
+        }
+      }
+
+      function agregaTarea() {
+        EnNuevaTarea = !EnNuevaTarea
+        var time;
+
+        if(EnNuevaTarea == true){
+          divForm.classList.add("col-md-6");
+          divTar.classList.add("col-md-6");
+
+          botAddTar.classList.remove("btn-primary");
+          botAddTar.classList.add("btn-danger");
+          botAddTar.innerHTML = "Cancelar Nueva Tarea";
+
+          let windowModal = document.getElementById("SCROLL");
+          let windowForm = document.getElementById("collapseForm");
+          // console.log(windowModal.scrollHeight, windowForm.scrollHeight);
+
+          if( isBreakpoint('xs') || isBreakpoint('sm')) {
+            setTimeout(() => {
+              windowModal.scrollTo(0, windowModal.scrollHeight + windowForm.scrollHeight);
+            }, 325);
+          }
+          else {
+            windowModal.scrollTo(0,0);
+          }
+        }
+        else {
+          botSaveTar.style.display = "none";
+
+          setTimeout(() => {
+            divForm.classList.remove("col-md-6");
+            divTar.classList.remove("col-md-6");
+
+            botAddTar.classList.remove("btn-danger");
+            botAddTar.classList.add("btn-primary");
+            botAddTar.innerHTML = "Nueva Tarea";
+
+            limpiaCampos();
+          }, 325);
+        }
+      }
+
+      function limpiaCampos() {
+        inpTitle.value = "";
+        inpComplet.checked = false;
+      }
+    </script>
+    <!-- ..... -->
+
+
+    <!-- Formulario Interrupr Listening -->
+    <script>
+      window.addEventListener("load", function() {
+        document.getElementById('nuevaTarForm').addEventListener("submit", function(e) {
+          e.preventDefault();
+          console.log('Se ha prevenido Formulario');
+
+          let obj = this;
+          TODOS_POST(obj);
+        })
+      });
+
+      function FORM_SUBMIT(){
+        document.getElementById('BUT_SUB').click();
+        // let obj = document.getElementById('nuevaTarForm');
+        // TODOS_POST(obj);
+      }
+    </script>
+    <!-- ..... -->
+
+
+    <!-- APIRest Users -->
+    <script>
+      function CLONE(template, append) {
+        let clon = template.cloneNode(true);
+        append.appendChild(clon);
+      }
+
+      function CLEAR(append) {
+        append.innerHTML = '';
+      }
+
+      function USER_TEMP(element, template, append) {
+        template.querySelector(".USER_ID").textContent = element.id;
+        template.querySelector(".USER_NAME").textContent = element.username;
+        template.querySelector(".USER_HEADER").dataset.target = '#accordion_'+element.id;
+        template.querySelector(".USER_HEADER").dataset.id = element.id;
+        template.querySelector(".USER_APPEND").setAttribute("id", 'accordion_'+element.id);
+        // template.querySelector(".USER_TEMP").setAttribute("id", 'infoTemp_'+element.id);
+        CLONE(template, append);
+      }
+
+      function USER_GET() {
+        const template = document.getElementById("userTemp").content;
+        const append = document.getElementById("accordionP");
+
+        fetch('https://jsonplaceholder.typicode.com/users')
+        .then(response => response.json())
+        .then(usuarios => {
+          usuarios.forEach(usuario => {
+            USER_TEMP(usuario, template, append);
+          });
+        });
+      }
+    </script>
+    <!-- ..... -->
+
+
+    <!-- APIRest Info User -->
+    <script>
+      function INFO_TEMP(element, template, append) {
+        template.querySelector(".INFO_PER").innerHTML =
+          "<b>"+element.name+"</b><br>"+
+          "<em>"+element.email+"</em><br>"+
+          "<code>"+element.phone+"</code><br>"+
+          "<u class='text-primary'>"+element.website+"</u><br>"
+        ;
+        template.querySelector(".INFO_DIR").innerHTML =
+          element.address.street+"<br>"+
+          element.address.suite+"<br>"+
+          element.address.city+"<br>"+
+          "<small>"+element.address.zipcode+"</small><br>"
+        ;
+        template.querySelector(".INFO_WOR").innerHTML =
+          "<b>"+element.company.name+"</b><br>"+
+          "<i>"+element.company.catchPhrase+"</i><br>"+
+          "<small>"+element.company.bs+"</small><br>"
+        ;
+        template.querySelector(".BUT_POSTS").dataset.id = element.id;
+        template.querySelector(".BUT_TODOS").dataset.id = element.id;
+
+        CLEAR(append);
+        CLONE(template, append);
+      }
+
+      function INFO_GET(obj) {
+        let id = obj.dataset.id;
+        console.log("user id: "+id);
+
+        const template = document.getElementById("infoTemp").content;
+        const append = document.getElementById("accordion_"+id);
+
+        fetch('https://jsonplaceholder.typicode.com/users/'+id)
+        .then(response => response.json())
+        .then(info => {
+          INFO_TEMP(info, template, append);
+        });
+      }
+    </script>
+    <!-- ..... -->
+
+
+    <!-- APIRest Posts y Comments -->
+    <script>
+      function POSTS_TEMP(element, template, append) {
+        template.querySelector(".POSTS_TITLE").textContent = element.title;
+        template.querySelector(".POSTS_BODY").textContent = element.body;
+        template.querySelector(".POSTS_COMMENTS_APPEND").setAttribute("id", 'commentsAppend_'+element.id);
+        template.querySelector(".POSTS_COMMENTS_TEMP").setAttribute("id", 'commentsTemp_'+element.id);
+        CLONE(template, append);
+      }
+
+      function COMMENTS_TEMP(element, template, append) {
+        template.querySelector(".COMMENTS_NAME").textContent = element.name;
+        template.querySelector(".COMMENTS_EMAIL").textContent = element.email;
+        template.querySelector(".COMMENTS_BODY").textContent = element.body;
+        CLONE(template, append);
+      }
+
+      function POSTS_GET(obj) {
+        let id = obj.dataset.id;
+        console.log("post userId: "+id);
+
+        const template = document.getElementById("postsTemp").content;
+        const append = document.getElementById("postsAppend");
+        CLEAR(append);
+
+        fetch('https://jsonplaceholder.typicode.com/users/'+id+'/posts')
+        .then(response => response.json())
+        .then(posts => {
+          posts.forEach(post => {
+            POSTS_TEMP(post, template, append);
+            COMMENTS_GET(post);
+          });
+        });
+      }
+
+      function COMMENTS_GET(obj) {
+        let id = obj.id;
+        console.log("comment postId: "+id);
+
+        const template = document.getElementById("commentsTemp_"+id).content;
+        const append = document.getElementById("commentsAppend_"+id);
+
+        fetch('https://jsonplaceholder.typicode.com/post/'+id+'/comments')
+        .then(response => response.json())
+        .then(comments => {
+          comments.forEach(comment => {
+            COMMENTS_TEMP(comment, template, append);
+          });
+        });
+      }
+    </script>
+
+
+    <!-- APIRest Todos : tareas -->
+    <script>
+      // GET Method
+      function TODOS_TEMP(element, template, append) {
+        template.querySelector(".TODOS_TITLE").textContent = element.title;
+        template.querySelector(".TODOS_COMPLETED").checked = element.completed;
+        document.querySelector(".FORM").dataset.id = element.userId;
+        CLONE(template, append);
+      }
+
+      function TODOS_GET(obj) {
+        let id = obj.dataset.id;
+        console.log("todos userId: "+id);
+
+        const template = document.getElementById("todosTemp").content;
+        const append = document.getElementById("todosAppend");
+        CLEAR(append);
+
+        fetch('https://jsonplaceholder.typicode.com/users/'+id+'/todos')
+        .then(response => response.json())
+        .then(todos => {
+          todos.forEach(uno => {
+            TODOS_TEMP(uno, template, append);
+          });
+        });
+      }
+
+      // POST METHOD
+      function TODOS_POST(obj) {
+        let id = obj.dataset.id;
+        const title = obj.elements["title"].value;
+        const completed = obj.elements["completed"].checked;
+
+        console.log("todos post id: "+id+" titulo: "+title+" completed: "+completed);
+
+        fetch('https://jsonplaceholder.typicode.com/users/'+id+'/todos', {
+          method: 'POST',
+          body: JSON.stringify({
+            title: title,
+            completed: completed,
+          }),
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+          },
+        })
+        .then((response) => response.json())
+        .then((json) => {
+          console.log(json);
+          document.getElementById("addTarea").click();
+          alert("¡Felicidades!\nEl resultado es:\n\n"+JSON.stringify(json));
+        });
+
+      }
+    </script>
+    <!-- ..... -->
+
+
+    <!-- APIRest Inicialización -->
+    <script>
+      document.addEventListener("DOMContentLoaded", USER_GET);
+    </script>
+    <!-- ..... -->
+
+
+    <!-- Termina Scripts -->
+
+
+    <!-- Script External Sources -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- ..... -->
+
+  </body>
+</html>
